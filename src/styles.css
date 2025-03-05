@@ -1,1 +1,356 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+html, body { height: 100%; }
+body { margin: 0; font-family: 'Roboto', sans-serif; background-color: #fff; color: #333; overflow: hidden; }
+
+h1, h2, h3, h4, h5, h6, .app-name {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Personalizações para melhorar a aparência de elementos comuns */
+button.mat-mdc-raised-button {
+  border-radius: 6px;
+  font-weight: 500;
+  padding: 0 20px;
+  height: 44px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+}
+
+button.mat-mdc-raised-button.mat-primary {
+  background: linear-gradient(135deg, #3949ab, #1e88e5);
+}
+
+button.mat-mdc-raised-button.mat-accent {
+  background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+}
+
+button.mat-mdc-raised-button.mat-warn {
+  background: linear-gradient(135deg, #f44336, #e53935);
+}
+
+.mat-mdc-raised-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Melhorias nas tabelas */
+.mat-mdc-table {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mat-mdc-header-row {
+  background-color: #f5f5f5;
+}
+
+.mat-mdc-row:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Customização de cards */
+.mat-mdc-card {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.mat-mdc-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* Ajustes gerais para melhorar a aparência */
+.mat-mdc-form-field {
+  width: 100%;
+  font-size: 14px;
+}
+
+.mat-mdc-form-field-infix {
+  width: auto !important;
+}
+
+/* Aprimorar os controles de formulário */
+.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-flex {
+  background-color: white;
+  border-radius: 8px;
+}
+
+/* Melhorar aparência dos botões */
+.mat-mdc-raised-button {
+  font-size: 14px !important;
+  letter-spacing: 0.5px;
+  border-radius: 6px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Melhorar a visualização da tabela */
+table {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.mat-mdc-table {
+  background: white;
+  border-radius: 4px;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box !important;
+}
+
+.mat-mdc-paginator {
+  background: white;
+}
+
+/* Ajustar espaçamentos gerais */
+body .mat-typography h1 {
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+
+/* Remover os botões com fundo verde quando aparecerem */
+button.mat-icon-button {
+  background-color: transparent !important;
+}
+
+.mat-badge-content {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+/* Garantir que os botões verdes da toolbar sejam eliminados */
+.mat-mdc-icon-button,
+button.mat-icon-button,
+.toolbar button {
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Melhorar contraste nos elementos do menu lateral */
+mat-sidenav mat-nav-list a {
+  color: white !important;
+}
+
+/* Garantir que as tabelas preencham todo o espaço */
+.mat-mdc-table {
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Eliminar margens indesejadas em contêineres principais */
+.dashboard-container,
+.caminhoes-container,
+.content,
+mat-sidenav-content {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Garantir que o conteúdo ocupe toda a altura disponível */
+mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+}
+
+router-outlet + * {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilos de alta especificidade para corrigir botões e ícones */
+.mat-icon-button .mat-icon,
+button.mat-icon-button .mat-icon {
+  color: inherit !important;
+}
+
+/* Forçar a cor branca nos ícones do toolbar */
+.toolbar .mat-icon {
+  color: white !important;
+}
+
+/* Forçar largura total para todos os elementos principais */
+.mat-drawer-content {
+  width: 100% !important;
+}
+
+/* Scrollbars mais discretos */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* Para garantir que o conteúdo não sobreponha o menu lateral */
+.mat-drawer-container {
+  z-index: auto !important;
+}
+
+.mat-drawer-content {
+  position: relative;
+  z-index: 1;
+  display: block;
+  height: 100%;
+  overflow: auto;
+}
+
+/* Garantir que em mobile a barra lateral não seja exibida por padrão */
+@media (max-width: 768px) {
+  .mat-drawer.mat-drawer-side {
+    position: fixed;
+  }
+}
+
+/* Corrigir sobreposição de elementos */
+.content {
+  box-sizing: border-box;
+  position: relative;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Garantir que o router-outlet não cause problemas de layout */
+router-outlet + * {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+/* Adicionar estas regras para garantir a integridade do layout */
+
+/* Evitar que o sidenav sobreponha a toolbar */
+.mat-drawer-content {
+  margin-top: 64px !important;
+  height: calc(100% - 64px) !important;
+}
+
+/* Forçar o menu lateral a ficar abaixo da toolbar */
+.mat-drawer.mat-drawer-side {
+  top: 64px !important;
+  height: calc(100% - 64px) !important;
+}
+
+/* Centralização de elementos de loading */
+.loading-container {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 48px 24px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.loading-container > * {
+  margin: 0 auto !important;
+}
+
+.loading-container mat-spinner {
+  margin-bottom: 16px !important;
+}
+
+/* Garantir que o content siga as mesmas regras */
+.content {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Aplicar estilo clean aos menus de dropdown */
+.mat-menu-panel {
+  border-radius: 8px !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+  min-width: 200px !important;
+  max-width: 280px !important;
+  overflow: hidden !important;
+  margin-top: 10px !important;
+}
+
+.mat-menu-item {
+  height: 48px !important;
+  line-height: 48px !important;
+  font-size: 14px !important;
+  color: #333 !important;
+}
+
+.mat-menu-item .mat-icon {
+  color: #555 !important;
+  margin-right: 12px !important;
+}
+
+.mat-menu-item:hover {
+  background-color: #f5f7fa !important;
+}
+
+/* Menu do perfil específico */
+.user-menu .mat-menu-content {
+  padding: 0 !important;
+}
+
+.user-menu-header {
+  background-color: #f5f7fa !important;
+  padding: 16px !important;
+  border-bottom: 1px solid #eee !important;
+}
+
+.user-menu-header h4 {
+  margin: 0 0 4px 0 !important;
+  font-weight: 500 !important;
+  color: #333 !important;
+}
+
+.user-menu-header p {
+  margin: 0 !important;
+  font-size: 13px !important;
+  color: #666 !important;
+}
+
+.mat-divider {
+  margin: 4px 0 !important;
+}
+
+/* Adicionar estas regras para eliminar qualquer background indesejado */
+.mat-drawer-content {
+  background-color: white !important;
+}
+
+.mat-drawer-container {
+  background-color: white !important;
+}
+
+.content {
+  background-color: white !important;
+}
+
+/* Eliminar o possível problema do sidenav fechado */
+.sidenav-container.sidenav-closed {
+  background-color: white !important;
+}
+
+.sidenav-container.sidenav-closed .mat-drawer.mat-drawer-side {
+  transform: translateX(-100%) !important;
+  visibility: hidden !important;
+}

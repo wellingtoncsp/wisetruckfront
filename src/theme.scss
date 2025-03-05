@@ -1,0 +1,24 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Paleta de cores primária (tons de azul)
+$wisetruck-primary: mat.define-palette(mat.$indigo-palette, 600);
+// Paleta de cores secundária (tons de roxo)
+$wisetruck-accent: mat.define-palette(mat.$deep-purple-palette, A200, A100, A400);
+// Paleta de avisos (vermelho)
+$wisetruck-warn: mat.define-palette(mat.$red-palette);
+
+// Cria o tema light (padrão)
+$wisetruck-theme: mat.define-light-theme((
+  color: (
+    primary: $wisetruck-primary,
+    accent: $wisetruck-accent,
+    warn: $wisetruck-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+// Aplica o tema globalmente
+@include mat.all-component-themes($wisetruck-theme); 
