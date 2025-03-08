@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { CaminhoesComponent } from './components/caminhoes/caminhoes.component';
+import { CAMINHOES_ROUTES } from './caminhoes/caminhoes.routes';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'caminhoes', component: CaminhoesComponent },
+  { path: 'dashboard', component: DashboardComponent, title: 'WiseTruck - Dashboard' },
+  { path: 'caminhoes', children: CAMINHOES_ROUTES },
   // Adicione mais rotas conforme necessário
 ];

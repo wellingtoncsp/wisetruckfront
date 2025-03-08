@@ -59,221 +59,194 @@ button:hover {
   border-radius: 4px;
 }
 
-/* Reset completo e definição da estrutura básica */
+/* Layout base */
 .app-container {
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
   position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
   bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #fff;
-  overflow: hidden;
 }
 
-/* Barra superior fixa sem sobreposição */
+/* Barra de navegação superior */
 .toolbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  background: linear-gradient(90deg, #3949ab, #1e88e5);
-  color: white;
   height: 64px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  display: flex;
-  align-items: center;
+  min-height: 64px;
+  flex-shrink: 0;
+  z-index: 10;
 }
 
-/* Melhorar o aspecto dos botões na toolbar */
-.toolbar button {
-  color: white !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-
-.toolbar button:hover {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  transform: none !important;
-}
-
+/* Logo */
 .logo-container {
   display: flex;
   align-items: center;
-  margin-left: 8px;
-}
-
-.logo-img {
-  margin-right: 12px;
-  filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .app-name {
-  margin: 0;
+  margin-left: 8px;
   font-weight: 500;
-  letter-spacing: 1px;
-  font-size: 1.5rem;
-  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .toolbar-spacer {
   flex: 1 1 auto;
 }
 
-/* Container do sidenav com ajuste para evitar sobreposição */
+/* Container do sidenav */
 .sidenav-container {
-  position: absolute;
-  top: 64px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #fff;
-  height: calc(100% - 64px);
-  width: 100%;
-  overflow: hidden;
-}
-
-/* Sidenav ajustado para contraste e visibilidade */
-mat-sidenav {
-  width: 250px;
-  position: fixed;
+  flex: 1;
+  height: calc(100vh - 64px);
+  min-height: calc(100vh - 64px);
+  max-height: calc(100vh - 64px);
+  position: absolute !important;
   top: 64px !important;
-  height: calc(100% - 64px) !important;
-  background-color: #222;
-  border-right: none;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2);
-  z-index: 999;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-/* Melhorar o contraste e visibilidade do perfil do usuário */
+/* Menu lateral */
+mat-sidenav {
+  top: 0 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  border-top: none !important;
+  position: fixed;
+  height: calc(100vh - 64px) !important;
+  box-shadow: 3px 0 8px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  background-color: #f8f9fa;
+  border-right: 1px solid #e0e0e0;
+}
+
+/* Modo compacto */
+.sidenav-compact mat-sidenav {
+  width: 64px;
+}
+
+/* Conteúdo principal */
+mat-sidenav-content {
+  height: calc(100vh - 64px);
+  min-height: calc(100vh - 64px);
+  max-height: calc(100vh - 64px);
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+}
+
+.content {
+  padding: 20px;
+  box-sizing: border-box;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Informações do usuário */
 .user-info {
-  padding: 24px 20px;
-  background: linear-gradient(135deg, #3949ab, #1e88e5);
-  color: white;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  padding: 16px;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e8eaf6;
+  margin-right: 12px;
 }
 
 .avatar-icon {
-  font-size: 60px;
-  height: 60px;
-  width: 60px;
-  color: white;
-  margin-bottom: 12px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 32px;
+  height: 32px;
+  width: 32px;
+  color: #3949ab;
+}
+
+.user-details {
+  overflow: hidden;
 }
 
 .user-details h3 {
-  margin: 0 0 4px 0;
-  font-size: 18px;
+  margin: 0;
+  font-size: 16px;
   font-weight: 500;
+  color: #333;
 }
 
 .user-details p {
   margin: 0;
   font-size: 14px;
-  opacity: 0.9;
+  color: #666;
 }
 
-/* Menu lateral com melhor contraste e visibilidade */
-mat-nav-list {
-  padding-top: 8px;
-}
-
+/* Menu lateral */
 mat-nav-list a {
-  margin: 4px 8px;
   height: 48px;
-  border-radius: 6px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.8) !important;
-  font-size: 14px;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
+  color: #555;
+  margin: 4px 8px;
+  border-radius: 8px;
+}
+
+mat-nav-list a.active-link {
+  background-color: #e3f2fd;
+  color: #1976d2;
 }
 
 mat-nav-list a mat-icon {
   margin-right: 16px;
-  color: rgba(255, 255, 255, 0.6);
+  color: #555;
 }
 
-mat-nav-list a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: white !important;
+mat-nav-list a.active-link mat-icon {
+  color: #1976d2;
 }
 
-mat-nav-list a:hover mat-icon {
-  color: white;
+/* No modo compacto, ocultar texto e centralizar ícones */
+.sidenav-compact .user-details {
+  display: none;
 }
 
-mat-nav-list .active-link {
-  background-color: rgba(61, 90, 254, 0.2);
-  color: white !important;
-  font-weight: 500;
+.sidenav-compact mat-nav-list a span {
+  display: none;
 }
 
-mat-nav-list .active-link mat-icon {
-  color: #5c6bc0;
+.sidenav-compact .user-info {
+  justify-content: center;
+  padding: 16px 0;
 }
 
-/* Área de conteúdo principal sem margens desnecessárias */
-mat-sidenav-content {
-  margin-left: 250px !important;
-  width: calc(100% - 250px) !important;
-  height: 100%;
-  overflow-x: hidden;
-  transition: margin-left 0.3s ease, width 0.3s ease;
-  background-color: #fff;
+.sidenav-compact .user-avatar {
+  margin-right: 0;
 }
 
-.content {
+.sidenav-compact mat-nav-list a {
+  display: flex;
+  justify-content: center;
   padding: 0;
-  height: 100%;
-  overflow-y: auto;
-  width: 100%;
 }
 
-/* Para modo móvel, reajustar quando o sidenav estiver fechado */
-.sidenav-container.sidenav-closed mat-sidenav-content {
-  margin-left: 0 !important;
-  width: 100% !important;
+.sidenav-compact mat-nav-list a mat-icon {
+  margin-right: 0;
 }
 
-/* Adicionar uma classe ao container para quando o sidenav estiver fechado */
+/* Ajustes para dispositivos móveis */
 @media (max-width: 768px) {
-  .is-mobile .toolbar {
-    height: 56px;
-  }
-  
-  .is-mobile .sidenav-container {
-    top: 56px;
-    height: calc(100% - 56px);
-  }
-  
-  mat-nav-list a {
-    margin: 4px 8px;
-    height: 44px;
-  }
-  
-  .user-info {
-    padding: 16px;
-  }
-  
-  .avatar-icon {
-    font-size: 48px;
-    height: 48px;
-    width: 48px;
-  }
-  
-  mat-sidenav-content {
-    margin-left: 0 !important;
-    width: 100% !important;
-  }
-  
-  mat-sidenav {
-    top: 64px !important;
+  .toolbar {
+    padding-left: 16px;
   }
 }
 
@@ -498,4 +471,39 @@ router-outlet + * {
 .sidenav-closed mat-sidenav-content {
   margin-left: 0 !important;
   width: 100% !important;
+}
+
+/* Ajustes para dispositivos móveis */
+@media (max-width: 768px) {
+  mat-sidenav {
+    top: 64px !important;
+  }
+  
+  mat-sidenav-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+  
+  /* Em mobile, o sidenav compacto deve se comportar como fechado */
+  .sidenav-compact .mat-sidenav {
+    transform: translateX(-100%) !important;
+    visibility: hidden !important;
+  }
+}
+
+/* Garantir que não haja espaçamentos indesejados */
+.mat-drawer-container {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Adicionar ao arquivo de estilos existente */
+.active-link {
+  background-color: rgba(33, 150, 243, 0.1) !important;
+  color: var(--primary-color) !important;
+  font-weight: 500;
+}
+
+.active-link mat-icon {
+  color: var(--primary-color);
 }

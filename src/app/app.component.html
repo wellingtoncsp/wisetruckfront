@@ -180,8 +180,8 @@
 <div class="app-container" [class.is-mobile]="mobileQuery.matches">
   <!-- Barra de navegação superior -->
   <mat-toolbar color="primary" class="toolbar">
-    <button mat-icon-button (click)="snav.toggle()">
-      <mat-icon>menu</mat-icon>
+    <button mat-icon-button (click)="toggleMobileSidenav()" aria-label="Toggle sidenav">
+      <mat-icon>{{ sidenavExpanded ? 'menu_open' : 'menu' }}</mat-icon>
     </button>
     <div class="logo-container">
       <svg width="36" height="36" viewBox="0 0 200 200" class="logo-img">
@@ -246,11 +246,10 @@
   </mat-toolbar>
 
   <!-- Container principal com sidenav -->
-  <mat-sidenav-container class="sidenav-container" [class.sidenav-closed]="!sidenavOpened">
+  <mat-sidenav-container class="sidenav-container" [ngClass]="{'sidenav-compact': !sidenavExpanded}">
     <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" 
                 [fixedInViewport]="mobileQuery.matches" 
-                fixedTopGap="64"
-                [opened]="sidenavOpened">
+                [opened]="!mobileQuery.matches">
       <div class="user-info">
         <div class="user-avatar">
           <mat-icon class="avatar-icon">account_circle</mat-icon>
@@ -264,43 +263,43 @@
       <mat-nav-list>
         <a mat-list-item routerLink="/dashboard" routerLinkActive="active-link">
           <mat-icon>dashboard</mat-icon>
-          <span>Dashboard</span>
+          <span *ngIf="sidenavExpanded">Dashboard</span>
         </a>
         <a mat-list-item routerLink="/caminhoes" routerLinkActive="active-link">
           <mat-icon>local_shipping</mat-icon>
-          <span>Caminhões</span>
+          <span *ngIf="sidenavExpanded">Caminhões</span>
         </a>
         <a mat-list-item routerLink="/motoristas" routerLinkActive="active-link">
           <mat-icon>person</mat-icon>
-          <span>Motoristas</span>
+          <span *ngIf="sidenavExpanded">Motoristas</span>
         </a>
-        <a mat-list-item routerLink="/rotas" routerLinkActive="active-link">
+        <a mat-list-item routerLink="/viagens" routerLinkActive="active-link">
           <mat-icon>map</mat-icon>
-          <span>Rotas</span>
+          <span *ngIf="sidenavExpanded">Viagens</span>
         </a>
-        <a mat-list-item routerLink="/manutencao" routerLinkActive="active-link">
-          <mat-icon>build</mat-icon>
-          <span>Manutenção</span>
+        <a mat-list-item routerLink="/abastecimentos" routerLinkActive="active-link">
+          <mat-icon>local_gas_station</mat-icon>
+          <span *ngIf="sidenavExpanded">Abastecimentos</span>
         </a>
-        <a mat-list-item routerLink="/relatorios" routerLinkActive="active-link">
-          <mat-icon>assessment</mat-icon>
-          <span>Relatórios</span>
+        <a mat-list-item routerLink="/pedagios" routerLinkActive="active-link">
+          <mat-icon>toll</mat-icon>
+          <span *ngIf="sidenavExpanded">Pedágios</span>
         </a>
         <mat-divider></mat-divider>
+        <a mat-list-item routerLink="/relatorios" routerLinkActive="active-link">
+          <mat-icon>assessment</mat-icon>
+          <span *ngIf="sidenavExpanded">Relatórios</span>
+        </a>
         <a mat-list-item routerLink="/configuracoes" routerLinkActive="active-link">
           <mat-icon>settings</mat-icon>
-          <span>Configurações</span>
-        </a>
-        <a mat-list-item routerLink="/ajuda" routerLinkActive="active-link">
-          <mat-icon>help</mat-icon>
-          <span>Ajuda</span>
+          <span *ngIf="sidenavExpanded">Configurações</span>
         </a>
       </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
       <div class="content">
-        <!-- Conteúdo da rota atual será carregado aqui -->
+        <!-- Conteúdo da rota atual -->
         <router-outlet></router-outlet>
       </div>
     </mat-sidenav-content>

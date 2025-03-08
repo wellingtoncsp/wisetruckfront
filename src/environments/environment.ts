@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
-    apiUrl: 'https://wisetruckapi.onrender.com'
+    apiUrl: 'https://wisetruckapi.onrender.com/api'
   };
   

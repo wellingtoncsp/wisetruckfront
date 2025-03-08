@@ -11,6 +11,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { filter } from 'rxjs/operators';
+import { CaminhaoService } from './services/caminhao.service';
 
 @Component({
   selector: 'app-root',
@@ -39,12 +40,13 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private _mobileQueryListener: () => void;
 
-  sidenavOpened = true;
+  sidenavExpanded = true;
 
   constructor(
     private router: Router,
-    changeDetectorRef: ChangeDetectorRef,
-    media: MediaMatcher
+    private changeDetectorRef: ChangeDetectorRef,
+    media: MediaMatcher,
+    private caminhaoService: CaminhaoService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 768px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -64,20 +66,89 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // Verificar o tamanho da tela ao carregar
     if (this.mobileQuery.matches) {
-      this.sidenavOpened = false;
+      this.sidenavExpanded = false;
+    } else {
+      // Garantir que o menu esteja sempre presente em desktop
+      setTimeout(() => {
+        if (this.sidenav && !this.mobileQuery.matches) {
+          this.sidenav.open();
+        }
+      }, 100);
     }
+    
+    // Pré-carregar dados mais utilizados
+    this.preloadData();
   }
 
   ngOnDestroy(): void {
     this.mobileQuery.removeEventListener('change', this._mobileQueryListener);
   }
 
-  toggleSidenav() {
-    this.sidenavOpened = !this.sidenavOpened;
-    
-    // Atualize o layout do conteúdo após a alteração
+  ngAfterViewInit() {
+    // Garantir que o sidenav esteja aberto no modo desktop
     setTimeout(() => {
+      if (!this.mobileQuery.matches) {
+        this.sidenav.open();
+        
+        // Forçar recálculo do layout
+        this.adjustLayout();
+      }
+    }, 100);
+  }
+
+  toggleSidenav() {
+    this.toggleMobileSidenav();
+  }
+
+  private adjustLayout() {
+    // Forçar recálculo de layout
+    setTimeout(() => {
+      // Disparar evento de resize para que componentes possam se ajustar
       window.dispatchEvent(new Event('resize'));
+      
+      // Forçar atualização do DOM
+      this.changeDetectorRef.detectChanges();
     }, 300);
+  }
+
+  toggleMobileSidenav() {
+    if (this.mobileQuery.matches) {
+      if (this.sidenav) {
+        this.sidenav.toggle();
+        
+        setTimeout(() => {
+          this.changeDetectorRef.detectChanges();
+        }, 100);
+      }
+    } else {
+      this.sidenavExpanded = !this.sidenavExpanded;
+      
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+        this.changeDetectorRef.detectChanges();
+      }, 300);
+    }
+  }
+
+  ngAfterViewChecked() {
+    if (!this.mobileQuery.matches && this.sidenav && !this.sidenav.opened) {
+      setTimeout(() => {
+        this.sidenav.open();
+        this.changeDetectorRef.detectChanges();
+      }, 100);
+    }
+  }
+
+  private preloadData(): void {
+    // Não fazer pré-carregamento até que o backend seja mais rápido
+    console.log('Preload desabilitado temporariamente para evitar timeouts');
+    
+    // Manter comentado até resolver os problemas de performance do backend
+    /*
+    this.caminhaoService.getCaminhoes().subscribe({
+      next: (data) => console.log('Dados pré-carregados:', data.length),
+      error: (err) => console.error('Erro no pré-carregamento:', err)
+    });
+    */
   }
 }

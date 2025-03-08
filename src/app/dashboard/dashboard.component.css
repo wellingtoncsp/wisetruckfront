@@ -1,0 +1,47 @@
+/* Melhorar a aparência dos cards de estatísticas */
+.dashboard-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.card-header mat-icon {
+  margin-right: 12px;
+  color: var(--primary-color);
+}
+
+.card-header h3 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.metric-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+}
+
+.metric-label {
+  font-size: 14px;
+  color: #666;
+  margin-top: 4px;
+}
+
+.card-actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+} 

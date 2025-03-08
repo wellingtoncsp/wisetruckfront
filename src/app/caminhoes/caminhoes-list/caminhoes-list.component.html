@@ -1,0 +1,103 @@
+<div class="caminhoes-container">
+  <div class="header-container">
+    <div class="header-title">
+      <h1>Gerenciamento de Caminhões</h1>
+      <p class="header-subtitle">Cadastre e gerencie a frota de caminhões</p>
+    </div>
+    <button mat-raised-button color="primary" (click)="addCaminhao()">
+      <mat-icon>add</mat-icon>
+      Novo Caminhão
+    </button>
+  </div>
+
+  <div class="filter-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Filtrar</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex: placa, modelo...">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="loading-container" *ngIf="loading">
+    <mat-spinner diameter="40"></mat-spinner>
+    <p>Carregando caminhões...</p>
+  </div>
+
+  <div class="error-container" *ngIf="error">
+    <mat-icon color="warn">error</mat-icon>
+    <h3>Erro ao carregar dados</h3>
+    <p>Ocorreu um erro ao buscar a lista de caminhões.</p>
+    <button mat-raised-button color="primary" (click)="retry()">Tentar Novamente</button>
+  </div>
+
+  <div class="table-container mat-elevation-z2" *ngIf="!loading && !error">
+    <div class="empty-state" *ngIf="dataSource.length === 0">
+      <mat-icon color="primary">local_shipping</mat-icon>
+      <h3>Nenhum caminhão cadastrado</h3>
+      <p>Clique no botão "Novo Caminhão" para começar a cadastrar a sua frota.</p>
+      <button mat-raised-button color="primary" (click)="addCaminhao()">
+        <mat-icon>add</mat-icon>
+        Novo Caminhão
+      </button>
+    </div>
+
+    <table mat-table [dataSource]="dataSource" matSort *ngIf="dataSource.length > 0">
+      <!-- Coluna Placa -->
+      <ng-container matColumnDef="placa">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Placa </th>
+        <td mat-cell *matCellDef="let caminhao"> {{caminhao.placa}} </td>
+      </ng-container>
+
+      <!-- Coluna Modelo -->
+      <ng-container matColumnDef="modelo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Modelo </th>
+        <td mat-cell *matCellDef="let caminhao"> {{caminhao.modelo}} </td>
+      </ng-container>
+
+      <!-- Coluna Data de Fabricação -->
+      <ng-container matColumnDef="dataFabricacao">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Fabricação </th>
+        <td mat-cell *matCellDef="let caminhao"> {{caminhao.dataFabricacao | date:'dd/MM/yyyy'}} </td>
+      </ng-container>
+
+      <!-- Coluna Status -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let caminhao">
+          <span class="status-badge" [ngClass]="getStatusClass(caminhao.status)">
+            {{caminhao.status}}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Coluna Ações -->
+      <ng-container matColumnDef="acoes">
+        <th mat-header-cell *matHeaderCellDef> Ações </th>
+        <td mat-cell *matCellDef="let caminhao">
+          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Ações">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="viewCaminhao(caminhao)">
+              <mat-icon>visibility</mat-icon>
+              <span>Visualizar</span>
+            </button>
+            <button mat-menu-item (click)="editCaminhao(caminhao)">
+              <mat-icon>edit</mat-icon>
+              <span>Editar</span>
+            </button>
+            <button mat-menu-item (click)="deleteCaminhao(caminhao)">
+              <mat-icon color="warn">delete</mat-icon>
+              <span>Excluir</span>
+            </button>
+          </mat-menu>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+  </div>
+</div> 

@@ -1,0 +1,82 @@
+.loading-container,
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+
+.loading-container mat-spinner {
+  margin-bottom: 16px;
+}
+
+.error-container mat-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  margin-bottom: 16px;
+}
+
+.details-container {
+  padding: 8px 0;
+}
+
+.detail-row {
+  display: flex;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.detail-label {
+  flex: 0 0 150px;
+  font-weight: 500;
+  color: #555;
+}
+
+.detail-value {
+  flex: 1;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.status-disponivel {
+  background-color: #e6f7e6;
+  color: #2e7d32;
+}
+
+.status-manutencao {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+.status-em-viagem {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+}
+
+mat-dialog-content {
+  min-width: 400px;
+  max-height: 70vh;
+}
+
+@media (max-width: 600px) {
+  mat-dialog-content {
+    min-width: auto;
+  }
+  
+  .detail-row {
+    flex-direction: column;
+  }
+  
+  .detail-label {
+    margin-bottom: 4px;
+  }
+} 

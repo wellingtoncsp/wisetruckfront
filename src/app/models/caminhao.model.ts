@@ -1,9 +1,21 @@
 export interface Caminhao {
-  id: number;
+  id?: number;
   modelo: string;
-  marca: string;
-  ano: number;
+  placa: string;
+  dataFabricacao: Date | string;
+  status: 'Disponível' | 'Em Viagem' | 'Em Manutenção';
+}
+
+export interface CaminhaoFiltro {
+  modelo?: string;
   placa?: string;
-  capacidade?: number;
-  // Adicione outros campos conforme necessário
+  status?: string;
+}
+
+export interface CaminhaoPayload {
+  id?: number;
+  modelo: string;
+  placa: string;
+  dataFabricacao: string; // Formato YYYY-MM-DD
+  status: 'Disponível' | 'Em Viagem' | 'Em Manutenção';
 } 

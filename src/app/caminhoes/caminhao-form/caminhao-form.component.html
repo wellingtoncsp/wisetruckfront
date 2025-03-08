@@ -1,0 +1,60 @@
+<h2 mat-dialog-title>{{isEdit ? 'Editar' : 'Novo'}} Caminhão</h2>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Modelo</mat-label>
+        <input matInput formControlName="modelo" placeholder="Ex: Volvo FH 460" required>
+        <mat-error *ngIf="form.get('modelo')?.hasError('required')">
+          Modelo é obrigatório
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Placa</mat-label>
+        <input matInput formControlName="placa" placeholder="Ex: ABC1234" required>
+        <mat-error *ngIf="form.get('placa')?.hasError('required')">
+          Placa é obrigatória
+        </mat-error>
+        <mat-error *ngIf="form.get('placa')?.hasError('pattern')">
+          Formato de placa inválido (ex: ABC1234)
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Data de Fabricação</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dataFabricacao" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="form.get('dataFabricacao')?.hasError('required')">
+          Data de fabricação é obrigatória
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Status</mat-label>
+        <mat-select formControlName="status" required>
+          <mat-option *ngFor="let status of statusOptions" [value]="status">
+            {{status}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('status')?.hasError('required')">
+          Status é obrigatório
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onCancel()" [disabled]="loading">Cancelar</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid || loading">
+      {{loading ? 'Salvando...' : (isEdit ? 'Atualizar' : 'Cadastrar')}}
+    </button>
+  </mat-dialog-actions>
+</form> 
